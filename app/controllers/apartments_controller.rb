@@ -17,6 +17,12 @@ class ApartmentsController < ApplicationController
         render json: apartment, status: :created
     end
 
+    def update
+        apartment = Apartment.find(params[:id])
+        apartment.update!(apartment_params)
+        render json: apartment, status: :ok
+    end
+
     private
 
     def apartment_params
