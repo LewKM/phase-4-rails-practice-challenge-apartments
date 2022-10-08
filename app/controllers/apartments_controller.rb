@@ -23,10 +23,23 @@ class ApartmentsController < ApplicationController
         render json: apartment, status: :ok
     end
 
+    def destroy
+        apartment = Apartment.find(params[:id])
+        apartment.destroy
+        head :no_content
+    end
+
     private
 
     def apartment_params
         params.permit(:number)
     end
 
+    def render_unprocessable_entity_response(invalid)
+        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+    end
+
+    def render_not_found_response
+        render json: { error: "Apartment not found" }, status: :not_found
+    end
 end
