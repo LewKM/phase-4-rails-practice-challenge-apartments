@@ -6,4 +6,10 @@ class ApartmentsController < ApplicationController
         apartments = Apartment.all
         render json: apartments, status: :ok
     end
+
+    def show
+        apartment = Apartment.find(params[:id])
+        render json: apartment, status: :ok
+    end
+
 end
