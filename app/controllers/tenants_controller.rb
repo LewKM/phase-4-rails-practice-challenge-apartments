@@ -17,10 +17,16 @@ class TenantsController < ApplicationController
         render json: tenant, status: :created
     end
 
+    def update
+        tenant = Tenant.find(params[:id])
+        tenant.update!(tenant_params)
+        render json: tenant, status: :ok
+    end
+
     private
 
     def tenant_params
         params.permit(:name, :age)
     end
-    
+
 end
