@@ -35,4 +35,11 @@ class TenantsController < ApplicationController
         params.permit(:name, :age)
     end
 
+    def render_unprocessable_entity_response(invalid)
+        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+    end
+
+    def render_not_found_response
+        render json: { error: "Tenant not found" }, status: :not_found
+    end
 end
